@@ -1,11 +1,26 @@
 <html>
+    <head>
+        <style>
+        body{
+            background-color: lightgreen;
+        }    
+        </style>
+    </head>
     <canvas id="gameWithCanvas" width="800" height="600"></canvas>
+    <script src="Square.js"></script>
+    <script src="Board.js"></script>
     <script>
     let canvas;
     let canvasContext;
+    let board;
     window.onload = function (){
         canvas = document.getElementById('gameWithCanvas');
         canvasContext = canvas.getContext('2d');
+        board=new Board(canvas.width,canvas.height);
+        board.generate(10);
+        setInterval(()=>{
+            board.display(canvas,canvasContext,20);
+        },500);
     }
     </script>
 </html>
