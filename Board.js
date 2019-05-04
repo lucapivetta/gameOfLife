@@ -44,9 +44,13 @@ class Board {
         }
         for (let i = 0; i <= canvas.width; i += side) {
             canvasContext.moveTo(i, 0);
-            canvasContext.lineTo(i, canvas.height)
+            canvasContext.lineTo(i, canvas.height);
         }
 
         canvasContext.stroke();
+    }
+
+    changeSquareState(obj,side){
+        this.matrix[Math.trunc(obj.x/side)][Math.trunc(obj.y/side)].changeState();
     }
 }

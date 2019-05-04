@@ -1,8 +1,9 @@
 <html>
     <head>
+            <link rel="stylesheet" href="style.css" type="text/css">
         <style>
         body{
-            background-color: lightgreen;
+            background-color: rgb(42, 147, 173);
         }    
         </style>
     </head>
@@ -13,14 +14,40 @@
     let canvas;
     let canvasContext;
     let board;
+    const side=20;
+    
     window.onload = function (){
         canvas = document.getElementById('gameWithCanvas');
         canvasContext = canvas.getContext('2d');
         board=new Board(canvas.width,canvas.height);
-        board.generate(10);
+        board.generate(side);
         setInterval(()=>{
-            board.display(canvas,canvasContext,20);
-        },500);
+            board.display(canvas,canvasContext,side);
+        },100);
+
+        canvas.addEventListener('mousedown', function handleMouseClick(e) {
+            board.changeSquareState(getMousePosition(e),side);
+        })
+        
     }
+    
+
+    function getMousePosition(e) {
+        let rect = canvas.getBoundingClientRect();
+        let root = document.documentElement;
+        let mouseX = e.clientX - rect.left - root.scrollLeft;
+        let mouseY = e.clientY - rect.top - root.scrollTop;
+        return {
+            x: mouseX,
+            y: mouseY
+        };
+    }
+    </script>
+    <body>
+        <button id="startBtn" onclick="play()">Start</button>
+    </body>
+    <script>
+        function play(){
+        }
     </script>
 </html>

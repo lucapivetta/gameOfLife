@@ -6,10 +6,14 @@ class Square{
         this._side=side;
     }
     get isAlive(){return this._isAlive;}
+    set isAlive(x){this._isAlive=x;}
     get x(){return this._x;}
     get y(){return this._y;}
     get side(){return this._side;}
 
+    changeState(){
+        this.isAlive=!this.isAlive;
+    }
     display(canvasContext){
         if(this._isAlive) canvasContext.fillStyle = 'black';
         else canvasContext.fillStyle = 'white';
