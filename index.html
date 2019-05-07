@@ -7,6 +7,7 @@
         }    
         </style>
     </head>
+	<body>
     <canvas id="gameWithCanvas" width="800" height="600"></canvas>
     <script src="Square.js"></script>
     <script src="Board.js"></script>
@@ -14,6 +15,7 @@
     let canvas;
     let canvasContext;
     let board;
+	let interval;
     const side=20;
     
     window.onload = function (){
@@ -21,16 +23,16 @@
         canvasContext = canvas.getContext('2d');
         board=new Board(canvas.width,canvas.height);
         board.generate(side);
-        setInterval(()=>{
+        interval = setInterval(()=>{
             board.display(canvas,canvasContext,side);
         },100);
 
-        canvas.addEventListener('mousedown', function handleMouseClick(e) {
-            board.changeSquareState(getMousePosition(e),side);
-        })
+        canvas.addEventListener('mousedown',  handleMouseClick)
         
     }
-    
+    function handleMouseClick(e) {
+            board.changeSquareState(getMousePosition(e),side);
+        }
 
     function getMousePosition(e) {
         let rect = canvas.getBoundingClientRect();
@@ -41,13 +43,20 @@
             x: mouseX,
             y: mouseY
         };
-    }
+		}
+	function play(){
+		canvas.removeEventListener('mousedown', handleMouseClick);
+		clearInterval(interval);
+		//board.cellAlive(1,1);
+		interval = setInterval(()=>{
+			board.gameOfLife(side);
+			board.display(canvas,canvasContext,side);
+		},400);
+	}
+    
     </script>
-    <body>
+    
         <button id="startBtn" onclick="play()">Start</button>
     </body>
-    <script>
-        function play(){
-        }
-    </script>
+    
 </html>
