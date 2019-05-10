@@ -48,6 +48,7 @@
 		canvas.removeEventListener('mousedown', handleMouseClick);
 		clearInterval(interval);
 		//board.cellAlive(1,1);
+
 		interval = setInterval(()=>{
 			board.gameOfLife(side);
 			board.display(canvas,canvasContext,side);
